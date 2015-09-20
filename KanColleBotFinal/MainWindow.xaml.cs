@@ -40,7 +40,7 @@ namespace KanColleBotFinal
 
             set.Read();
             Missions.ExpeditionChanger.loadFromFile();
-            Translation.Translation.LoadShipTranslation();
+            Translation.Translation.LoadTranslations();
             SeijaCommunicator.Init();
             HttpSender.SetInfo(set.adress, set.api);
             LogWriter.StartSession();

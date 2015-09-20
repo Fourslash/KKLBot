@@ -21,7 +21,8 @@ namespace KanColleBotFinal.Quests
                 Type = (QuestType)Convert.ToInt32(qst.api_type);
                 NameJP = qst.api_title;
                 DescriptionJP = qst.api_detail;
-                /*load translation*/
+                NameEN = Translation.Translation.TranslateQuestName(NameJP);
+                DescriptionEN = Translation.Translation.TranslateQuestDescription(DescriptionJP);
             }
             catch (Exception ex)
             {

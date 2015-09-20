@@ -113,6 +113,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Ships\Fleet.cs" />
     <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Translation\QuestsTranslations.cs" />
     <Compile Include="Translation\Ships.cs" />
     <Compile Include="Translation\Translation.cs" />
     <Page Include="MainWindow.xaml">
