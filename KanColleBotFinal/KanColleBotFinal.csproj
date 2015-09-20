@@ -107,7 +107,6 @@
     <Compile Include="Missions\ExpeditionChanger.cs" />
     <Compile Include="Missions\FleetCreator.cs" />
     <Compile Include="Quests\Quest.cs" />
-    <Compile Include="Quests\TestClass.cs" />
     <Compile Include="SeijaCommunicator.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Ships\Fleet.cs" />
