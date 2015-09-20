@@ -82,6 +82,26 @@ namespace KanColleBotFinal
                         SayToSeija(answer);
                         break;
                     }
+                case "quests":
+                    {
+                        string result="";
+                        List<Quests.Quest> lst = DescisionMaker.QuestProcesser.QuestInfo;
+                        if (lst.Count == 0)
+                            result = "Can't see any active quests";
+                        else
+                        {
+                            foreach(var quest in lst)
+                            {
+                                result += quest.Info;
+                                result += "\n";
+                            }
+                        }
+
+                        result = LogWriter.TEREZITYFY(result);
+                        string answer = string.Join(" ", new string[] { "%" + conference, result });
+                        SayToSeija(answer);
+                        break;
+                    }
                 case "actions":
                     {
                         string result = LogWriter.TEREZITYFY(ActionStack.getInfo);

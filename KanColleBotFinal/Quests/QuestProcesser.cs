@@ -17,7 +17,23 @@ namespace KanColleBotFinal.Quests
             404,
         };
         
-
+      public List<Quest> QuestInfo
+        {
+            get
+            {
+                List<Quest> lst = new List<Quest>();
+                List<int> keys = new List<int>(Pages.Keys.ToArray());
+                foreach (var key in keys)
+                {
+                    foreach (var quest in Pages[key])
+                    {
+                        if (quest.State != QuestState.OnList)
+                            lst.Add(quest);
+                    }
+                }
+                return lst;
+            }
+        }
 
         List<Quest> CompletedQuests = new List<Quest>();
         List<Quest> QuestToGet = new List<Quest>();

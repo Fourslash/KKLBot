@@ -12,8 +12,12 @@ namespace KanColleBotFinal.Quests
 
     class Quest
     {
+
+
+
         public Quest (dynamic qst)
         {
+          
             try
             {
                 ID = Convert.ToInt32(qst.api_no);
@@ -30,6 +34,14 @@ namespace KanColleBotFinal.Quests
             }
 
         }
+        public string Info
+        {
+            get
+            {
+                return string.Format("[{0}][{1}] {2}", State, Type, DescriptionEN);
+            }
+        }
+
         public QuestState State { get; set; }
         public QuestType Type { get; set; }
         public int ID { get; set; }
