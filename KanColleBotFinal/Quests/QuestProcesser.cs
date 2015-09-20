@@ -27,7 +27,7 @@ namespace KanColleBotFinal.Quests
                 {
                     foreach (var quest in Pages[key])
                     {
-                        if (quest.State != QuestState.OnList)
+                        if (quest.State != QuestState.OnList && quest.ID!=-1)
                             lst.Add(quest);
                     }
                 }
