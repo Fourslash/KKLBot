@@ -44,6 +44,14 @@ namespace KanColleBotFinal
            if (actionList.Remove(act)==false)
            throw new Exception("Cant remove action from stack after execurion");
         }
+
+        static void addCheckQuests()
+        {
+            if (actionList.Count(x => x.GetType() == typeof(CheckQuestAction)) == 0)
+            {
+                AddAction(new CheckQuestAction(DateTime.Now.AddMinutes(30)));
+            }
+        }
         public static void StartBot()
         {
             while(true)
@@ -53,7 +61,7 @@ namespace KanColleBotFinal
                 {
                     if (actionList.Count(x => x.GetType() == typeof(WaitAction)) == 0)
                         AddAction(new WaitAction());
-
+                    addCheckQuests();
 
                     CurrentAction = new IdleAction();
                     DescisionMaker.AddExpeditions();

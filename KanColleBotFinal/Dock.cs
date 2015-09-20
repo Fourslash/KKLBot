@@ -203,9 +203,27 @@ namespace KanColleBotFinal
                             //HttpSender.SupplyFleet(Dock.Fleets.Find(x => x.ID == 2));
                             break;
                         }
+                    case "/kcsapi/api_get_member/material":
+                        {
+
+                            ///////
+                            Fuel = Convert.ToInt32(json.api_data[0].api_value);
+                            Ammo = Convert.ToInt32(json.api_data[1].api_value);
+                            Steel = Convert.ToInt32(json.api_data[2].api_value);
+                            Bauxite = Convert.ToInt32(json.api_data[3].api_value);
+                            InstantConstruction = Convert.ToInt32(json.api_data[4].api_value);
+                            InstantRepair = Convert.ToInt32(json.api_data[5].api_value);
+                            DevelopmentMaterial = Convert.ToInt32(json.api_data[6].api_value);
+
+                            
+                            break;
+                        }
                     case "/kcsapi/api_get_member/questlist":
                         {
+
+                            DescisionMaker.QuestProcesser.UpdatePageInfo(json.api_data);
                             break;
+
                         }
                     case "/kcsapi/api_req_mission/start":
                         {

@@ -86,6 +86,7 @@
     </ApplicationDefinition>
     <Compile Include="ActionStack.cs" />
     <Compile Include="Actions\CheckForReturns.cs" />
+    <Compile Include="Actions\CheckQuestAction.cs" />
     <Compile Include="Actions\IdleAction.cs" />
     <Compile Include="Actions\SendExpAction.cs" />
     <Compile Include="Actions\StackAction.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Missions\ExpeditionChanger.cs" />
     <Compile Include="Missions\FleetCreator.cs" />
     <Compile Include="Quests\Quest.cs" />
+    <Compile Include="Quests\QuestProcesser.cs" />
     <Compile Include="SeijaCommunicator.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Ships\Fleet.cs" />

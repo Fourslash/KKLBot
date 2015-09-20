@@ -14,7 +14,7 @@ namespace KanColleBotFinal
     {
         
         KanColleProxy proxy;
-
+        public static Quests.QuestProcesser QuestProcesser;
 
 
 
@@ -24,6 +24,7 @@ namespace KanColleBotFinal
             proxy = new KanColleProxy();
             Map.Init();
             Dock.Init();
+            QuestProcesser = new Quests.QuestProcesser();
         }
 
         public static void CheckForReturns()

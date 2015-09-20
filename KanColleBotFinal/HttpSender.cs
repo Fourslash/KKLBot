@@ -44,6 +44,35 @@ namespace KanColleBotFinal
             dct.Add("api_id", fl.ID.ToString());
             SendRequest("/kcsapi/api_req_hensei/change", dct);
         }
+
+
+        public static void GetMaterials()
+        {
+            Dictionary<string, string> dct = new Dictionary<string, string>();
+            dct.Add("api_token", apiToken);
+            dct.Add("api_verno", "1");
+            SendRequest("/kcsapi/api_get_member/material", dct);
+        }
+
+        public static void CompleteQuest(int quest_id)
+        {
+            Dictionary<string, string> dct = new Dictionary<string, string>();
+            dct.Add("api_token", apiToken);
+            dct.Add("api_quest_id", quest_id.ToString());
+            dct.Add("api_verno", "1");
+            SendRequest("/kcsapi/api_req_quest/clearitemget", dct);
+            LogWriter.WriteLogSucces(string.Format("Completed quest #{0}",quest_id));
+        }
+
+        public static void StartQuest(int quest_id)
+        {
+            Dictionary<string, string> dct = new Dictionary<string, string>();
+            dct.Add("api_token", apiToken);
+            dct.Add("api_quest_id", quest_id.ToString());
+            dct.Add("api_verno", "1");
+            SendRequest("/kcsapi/api_req_quest/start", dct);
+            LogWriter.WriteLogSucces(string.Format("Got quest #{0}", quest_id));
+        }
         public static void SupplyFleet(Ships.Fleet fl)
         {
             List<int> ships = new List<int>();
@@ -62,13 +91,17 @@ namespace KanColleBotFinal
         }
         public static void GetQuestList (int page)
         {
-            if (page < 1 || page > 5)
+            if (page < 1)
                 throw new AlgoritmicException("Incorrect page");
             Dictionary<string, string> dct = new Dictionary<string, string>();
             dct.Add("api_token", apiToken);
             dct.Add("api_verno", "1");
             dct.Add("api_page_no", page.ToString());
             var answer = SendRequest("kcsapi/api_get_member/questlist", dct);
+          //  var ctn = answer.Content.ReadAsStringAsync().Result;
+
+
+
 
         }
 
@@ -101,7 +134,13 @@ namespace KanColleBotFinal
 
                     var formContent = new FormUrlEncodedContent(data);
                     var r = ht.PostAsync(apiFunc, formContent).Result;
-                    LogWriter.WriteLog("Sending request to "+apiFunc);
+                    if (r.IsSuccessStatusCode==false)
+                    {
+                        throw new AlgoritmicException(string.Format("{0} returned not success code", apiFunc));
+                    }
+                    LogWriter.WriteLog("Sended request to "+apiFunc);
+                    
+
                     return r;
 
                 }

@@ -14,12 +14,19 @@ namespace KanColleBotFinal.Quests
     {
         public Quest (dynamic qst)
         {
-            ID = Convert.ToInt32(qst.api_no);
-            State = (QuestState)Convert.ToInt32(qst.api_state);
-            Type = (QuestType)Convert.ToInt32(qst.api_type);
-            NameJP = qst.api_title;
-            DescriptionJP = qst.api_detail;
-            /*load translation*/
+            try
+            {
+                ID = Convert.ToInt32(qst.api_no);
+                State = (QuestState)Convert.ToInt32(qst.api_state);
+                Type = (QuestType)Convert.ToInt32(qst.api_type);
+                NameJP = qst.api_title;
+                DescriptionJP = qst.api_detail;
+                /*load translation*/
+            }
+            catch (Exception ex)
+            {
+                ID = -1;
+            }
 
         }
         public QuestState State { get; set; }
