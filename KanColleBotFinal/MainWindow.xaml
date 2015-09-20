@@ -1,0 +1,21 @@
+﻿<Window x:Class="KanColleBotFinal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="612" Width="956"  Closing="Window_Closing"  Topmost="False" SnapsToDevicePixels="False" WindowStyle="None">
+    <Grid>
+        <Canvas x:Name="_canvas" HorizontalAlignment="Left" Height="480" Margin="10,10,0,0" VerticalAlignment="Top" Width="800" Background="#FFEAEAEA" >
+            <WebBrowser x:Name="_webbrowser" Width="800" Height="480" />
+        </Canvas>
+        <Label x:Name="_lb_X" Content="Label" HorizontalAlignment="Left" Margin="10,507,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="_lb_Y" Content="Label" HorizontalAlignment="Left" Margin="10,534,0,0" VerticalAlignment="Top"/>
+        <Grid x:Name="MouseGrid" HorizontalAlignment="Left" Height="38" Margin="199,495,0,0" VerticalAlignment="Top" Width="88" Background="Black"/>
+        <Grid x:Name="ControlGrid" HorizontalAlignment="Left" Height="38" Margin="532,495,0,0" VerticalAlignment="Top" Width="88" Background="Black"/>
+        <Label x:Name="_lbColorCurrent" Content="Label" HorizontalAlignment="Left" Margin="96,542,0,0" VerticalAlignment="Top" Width="292"/>
+        <Label x:Name="_lbColorExample" Content="Label" HorizontalAlignment="Left" Margin="429,538,0,0" VerticalAlignment="Top" Width="288"/>
+        <Label x:Name="_lb_X_Copy" Content="Label" HorizontalAlignment="Left" Margin="879,500,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="_lb_Y_Copy" Content="Label" HorizontalAlignment="Left" Margin="879,527,0,0" VerticalAlignment="Top"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="842,455,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button x:Name="ShipChangeTest" Content="ShipChangeTest" HorizontalAlignment="Left" Margin="829,410,0,0" VerticalAlignment="Top" Width="109" Click="ShipChangeTest_Click"/>
+
+    </Grid>
+</Window>
