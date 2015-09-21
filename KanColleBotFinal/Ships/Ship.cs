@@ -39,7 +39,7 @@ namespace KanColleBotFinal.Ships
     }
 
     [Serializable]
-    class Ship
+    public class Ship
     {
         public Ship() { }
         public Ship(dynamic shp) 

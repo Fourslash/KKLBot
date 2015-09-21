@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KanColleBotFinal.Items
 {
-    class Item
+    public class Item
     {
     }
 }

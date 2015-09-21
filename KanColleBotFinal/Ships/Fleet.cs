@@ -10,7 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace KanColleBotFinal.Ships
 {
      [Serializable]
-    class Fleet
+    public class Fleet
     {
         public Fleet()
         {

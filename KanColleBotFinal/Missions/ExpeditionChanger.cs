@@ -73,8 +73,6 @@ namespace KanColleBotFinal.Missions
             try
             {
                 List<SettingPair> lst = SettingPair.GetList(fleetToExp);
-
-
                 if (!File.Exists(path))
                     using (File.Create(path)) ;
 

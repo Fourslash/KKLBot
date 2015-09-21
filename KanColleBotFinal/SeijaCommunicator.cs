@@ -116,6 +116,14 @@ namespace KanColleBotFinal
                         SayToSeija(answer);
                         break;
                     }
+
+                case "stats":
+                    {
+                        string result = LogWriter.TEREZITYFY(ResourceLogging.ResLogger.getBasicInfo());
+                        string answer = string.Join(" ", new string[] { "%" + conference, result });
+                        SayToSeija(answer);
+                        break;
+                    }
                 case "fleet_exp":
                     {
                         int fleet, exp;

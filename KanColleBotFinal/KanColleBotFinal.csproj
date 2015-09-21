@@ -109,6 +109,13 @@
     <Compile Include="Missions\FleetCreator.cs" />
     <Compile Include="Quests\Quest.cs" />
     <Compile Include="Quests\QuestProcesser.cs" />
+    <Compile Include="ResourceLogging\ChangeCounter.cs" />
+    <Compile Include="ResourceLogging\ExpCompletedRecord.cs" />
+    <Compile Include="ResourceLogging\LoggerRecord.cs" />
+    <Compile Include="ResourceLogging\QuestCompletedRecord.cs" />
+    <Compile Include="ResourceLogging\ResLogger.cs" />
+    <Compile Include="ResourceLogging\ResourseChange.cs" />
+    <Compile Include="ResourceLogging\ResupplyRecord.cs" />
     <Compile Include="SeijaCommunicator.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Ships\Fleet.cs" />

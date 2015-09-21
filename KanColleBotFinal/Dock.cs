@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using KanColleBotFinal.Ships;
 using KanColleBotFinal.Items;
 using KanColleBotFinal.Frames;
+using KanColleBotFinal.ResourceLogging;
 using Codeplex.Data;
 
 namespace KanColleBotFinal
@@ -28,6 +29,56 @@ namespace KanColleBotFinal
         static List<Ship> AllTheShips = new List<Ship>();
 
         #region recouses
+
+        static ResourceLogging.ResourseChange ChangeResourses (int newFuel, int newAmmo, int newSteel,
+            int newBaxite, int newInstantConstruction, int newInstantRepair, int newDevelopmentMaterial)
+        {
+
+            if (newFuel==0)
+                newFuel=Fuel;
+            if (newAmmo==0)
+                newAmmo=Ammo;
+            if (newSteel==0)
+                newSteel=Steel;
+            if (newBaxite==0)
+                newBaxite=Bauxite;
+            if (newInstantConstruction==0)
+                newInstantConstruction=InstantConstruction;
+            if (newInstantRepair==0)
+                newInstantRepair=InstantRepair;
+            if (newDevelopmentMaterial==0)
+                newDevelopmentMaterial=DevelopmentMaterial;
+
+
+            ResourceLogging.ResourseChange rc = new ResourceLogging.ResourseChange
+            {
+                oldFuel = Fuel,
+                oldAmmo = Ammo,
+                oldBauxite = Bauxite,
+                oldSteel = Steel,
+                oldDevelopmentMaterial = DevelopmentMaterial,
+                oldInstantConstruction = InstantConstruction,
+                oldInstantRepair = InstantRepair,
+                newAmmo = newAmmo,
+                newBauxite = newBaxite,
+                newFuel = newFuel,
+                newSteel = newSteel,
+                newInstantRepair = newInstantRepair,
+                newInstantConstruction = newInstantConstruction,
+                newDevelopmentMaterial = newDevelopmentMaterial,
+            };
+
+            Fuel=newFuel;
+            Ammo=newAmmo;
+            Steel = newSteel;
+            Bauxite = newBaxite;
+            InstantRepair = newInstantRepair;
+            InstantConstruction = newInstantConstruction;
+            DevelopmentMaterial = newDevelopmentMaterial;
+            return rc;
+
+        }
+
         static int Fuel;
         static int Ammo;
         static int Steel;
@@ -36,6 +87,66 @@ namespace KanColleBotFinal
         static int InstantConstruction;
         static int InstantRepair;
         static int DevelopmentMaterial;
+
+        //static int Fuel
+        //{
+        //    get
+        //    {
+        //        return fuel;
+        //    }
+        //    set
+        //    {
+        //        fuel=value;
+        //    }
+        //}
+
+        //static int Ammo
+        //{
+        //    get 
+        //    {
+        //        return ammo;
+        //    }
+        //}
+        //static int Steel
+        //{
+        //    get
+        //    {
+        //        return steel;
+        //    }
+        //}
+
+
+        //static int Bauxite
+        //{
+        //    get
+        //    {
+        //        return bauxite;
+        //    }
+        //}
+
+        //static int InstantConstruction
+        //{
+        //    get
+        //    {
+        //        return instantConstruction;
+        //    }
+        //}
+
+        //static int InstantRepair
+        //{
+        //    get
+        //    {
+        //        return instantRepair;
+        //    }
+        //}
+
+        //static int DevelopmentMaterial
+        //{
+        //    get
+        //    {
+        //        return developmentMaterial;
+        //    }
+        //}
 
 
 
@@ -173,13 +284,39 @@ namespace KanColleBotFinal
                             int result = Convert.ToInt32(json.api_result);
                             if (result != 1)
                                 throw new AlgoritmicException("Error on changing ships in fleet");
+
+                            
                             break;
                         }
                     case "/kcsapi/api_req_hokyu/charge":
                         {
                             int result = Convert.ToInt32(json.api_result);
                             if (result != 1)
-                                throw new AlgoritmicException("Error on changing ships in fleet");
+                                throw new AlgoritmicException("Error on suplying ships in fleet");
+                            var FuelTemp = Convert.ToInt32(json.api_data.api_material[0]);
+                            var AmmoTemp = Convert.ToInt32(json.api_data.api_material[1]);
+                            var SteelTemp = Convert.ToInt32(json.api_data.api_material[2]);
+                            var BauxiteTemp = Convert.ToInt32(json.api_data.api_material[3]);
+                            var rc= ChangeResourses(FuelTemp, AmmoTemp, SteelTemp, BauxiteTemp, 0, 0, 0);
+
+                            Fleet fleet = new Fleet();
+                            try
+                            {
+                                foreach (var node in json.api_data.api_ship)
+                                {
+                                    int id = Convert.ToInt32(node.api_id);
+                                    if (id == -1)
+                                        continue;
+                                    fleet = Fleets.Find(x => x.Ships.Count(y => y.ID_Fleet == id) > 0);
+                                    if (fleet.ID > 0)
+                                        break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                fleet = new Fleet();
+                            }
+                            ResLogger.AddRecord(new ResupplyRecord(fleet, DateTime.Now, rc));
                             break;
                         }
                     case "/kcsapi/api_port/port":
@@ -207,6 +344,14 @@ namespace KanColleBotFinal
                         {
 
                             ///////
+                            //var FuelTemp = Convert.ToInt32(json.api_data[0].api_value);
+                            //var AmmoTemp = Convert.ToInt32(json.api_data[1].api_value);
+                            //var SteelTemp = Convert.ToInt32(json.api_data[2].api_value);
+                            //var BauxiteTemp = Convert.ToInt32(json.api_data[3].api_value);
+                            //var InstantConstructionTemp = Convert.ToInt32(json.api_data[4].api_value);
+                            //var InstantRepairTemp = Convert.ToInt32(json.api_data[5].api_value);
+                            //var DevelopmentMaterialTemp = Convert.ToInt32(json.api_data[6].api_value);
+                            //ChangeResourses(FuelTemp, AmmoTemp, SteelTemp, BauxiteTemp, InstantConstructionTemp, InstantRepairTemp, DevelopmentMaterialTemp);
                             Fuel = Convert.ToInt32(json.api_data[0].api_value);
                             Ammo = Convert.ToInt32(json.api_data[1].api_value);
                             Steel = Convert.ToInt32(json.api_data[2].api_value);
@@ -214,7 +359,6 @@ namespace KanColleBotFinal
                             InstantConstruction = Convert.ToInt32(json.api_data[4].api_value);
                             InstantRepair = Convert.ToInt32(json.api_data[5].api_value);
                             DevelopmentMaterial = Convert.ToInt32(json.api_data[6].api_value);
-
                             
                             break;
                         }
@@ -230,6 +374,76 @@ namespace KanColleBotFinal
 
                             DateTime dt = DescisionMaker.UnixTimeStampToDateTime(Convert.ToDouble(json.api_data.api_complatetime) / 1000);
                             ActionStack.AddExpCheckAction(dt);
+                            break;
+                        }
+                    case "/kcsapi/api_req_mission/result": //Экспа пройдена
+                        {
+
+                            int result = Convert.ToInt32(json.api_result);
+                            if (result != 1)
+                                throw new AlgoritmicException("Error on exp return result");
+                            int expResult = Convert.ToInt32(json.api_clear_result);
+                            if (expResult != 1)
+                                throw new AlgoritmicException("Expedition failed!");
+
+                            var FuelTemp = Convert.ToInt32(json.api_data.api_material[0]);
+                            var AmmoTemp = Convert.ToInt32(json.api_data.api_material[1]);
+                            var SteelTemp = Convert.ToInt32(json.api_data.api_material[2]);
+                            var BauxiteTemp = Convert.ToInt32(json.api_data.api_material[3]);
+                            var rc= ChangeResourses(FuelTemp, AmmoTemp, SteelTemp, BauxiteTemp, 0, 0, 0);
+                            //List<int> ships = new List<int>();
+                            Fleet fleet = new Fleet();
+                            try
+                            {
+                                foreach (var node in json.api_data.api_ship_id)
+                                {
+                                    int id = Convert.ToInt32(node);
+                                    if (id == -1)
+                                        continue;
+                                    fleet = Fleets.Find(x => x.Ships.Count(y => y.ID_Fleet == id) > 0);
+                                    if (fleet.ID > 0)
+                                        break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                fleet = new Fleet();
+                            }
+                            ResLogger.AddRecord(new ExpCompletedRecord(fleet, DateTime.Now, rc));
+                            break;
+                        }
+                    case "/kcsapi/api_req_quest/clearitemget": //Квест пройден
+                        {
+                            int InstantRepairTemp=0;
+                            int InstantConstructionTemp=0;
+                            int DevelopmentMaterialTemp=0;
+                            foreach (var node in json.api_data.api_bonuses)
+                            {
+                                try
+                                {
+                                    if (node.api_count)
+                                    {
+                                        int id = Convert.ToInt32(node.api_item.api_id);
+                                        switch(id)
+                                        {
+                                            case 5: InstantConstructionTemp = Convert.ToInt32(node.api_count); break;
+                                            case 6: InstantRepairTemp = Convert.ToInt32(node.api_count); break; 
+                                            case 7: DevelopmentMaterialTemp = Convert.ToInt32(node.api_count); break;
+
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                }
+                            }
+
+                            var FuelTemp = Convert.ToInt32(json.api_data.api_material[0]);
+                            var AmmoTemp = Convert.ToInt32(json.api_data.api_material[1]);
+                            var SteelTemp = Convert.ToInt32(json.api_data.api_material[2]);
+                            var BauxiteTemp = Convert.ToInt32(json.api_data.api_material[3]);
+                            var rc=ChangeResourses(FuelTemp, AmmoTemp, SteelTemp, BauxiteTemp, InstantConstructionTemp, InstantRepairTemp, DevelopmentMaterialTemp);
+                            ResLogger.AddRecord(new QuestCompletedRecord(DateTime.Now, rc));
                             break;
                         }
                     default:
