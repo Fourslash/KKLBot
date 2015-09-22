@@ -30,49 +30,49 @@ namespace KanColleBotFinal.ResourceLogging
         {
             get
             {
-                return oldFuel - newFuel;
+                return newFuel - oldFuel;
             }
         }
         public int ammoChange
         {
             get
             {
-                return oldAmmo - newAmmo; 
+                return newAmmo - oldAmmo; 
             }
         }
         public int steelChange
         {
             get
             {
-                return oldSteel - newSteel; 
+                return newSteel - oldSteel; 
             }
         }
          public int bauxiteChange
         {
             get
             {
-                return oldBauxite - newBauxite; 
+                return newBauxite - oldBauxite; 
             }
         }
          public int instantConstructionChange
         {
             get
             {
-                return oldInstantConstruction - newInstantConstruction; 
+                return newInstantConstruction - oldInstantConstruction; 
             }
         }
          public int instantRepairChange
         {
             get
             {
-                return oldInstantRepair - newInstantRepair; 
+                return newInstantRepair - oldInstantRepair; 
             }
         }
         public int developmentMaterialChange
         {
             get
             {
-                return oldDevelopmentMaterial - newDevelopmentMaterial; 
+                return newDevelopmentMaterial - oldDevelopmentMaterial; 
             }
         }
     }
