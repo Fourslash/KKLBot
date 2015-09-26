@@ -16,6 +16,7 @@
         <Label x:Name="_lb_Y_Copy" Content="Label" HorizontalAlignment="Left" Margin="879,527,0,0" VerticalAlignment="Top"/>
         <Button Content="Close" HorizontalAlignment="Left" Margin="842,455,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <Button x:Name="ShipChangeTest" Content="ShipChangeTest" HorizontalAlignment="Left" Margin="829,410,0,0" VerticalAlignment="Top" Width="109" Click="ShipChangeTest_Click"/>
+        <Button x:Name="ResLogTest" Content="ResLoggerTest" HorizontalAlignment="Left" Margin="829,383,0,0" VerticalAlignment="Top" Width="109" Click="ResLogTest_Click"/>
 
     </Grid>
 </Window>

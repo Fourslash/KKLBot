@@ -9,6 +9,8 @@ namespace KanColleBotFinal.ResourceLogging
     [Serializable]
     public abstract class LoggerRecord
     {
+        public LoggerRecord()
+        { }
         public DateTime Date;
         public ResourseChange Change;
         public LoggerRecord(DateTime dt, ResourseChange ch)

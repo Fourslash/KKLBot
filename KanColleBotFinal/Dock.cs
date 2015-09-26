@@ -30,7 +30,7 @@ namespace KanColleBotFinal
 
         #region recouses
 
-        static ResourceLogging.ResourseChange ChangeResourses (int newFuel, int newAmmo, int newSteel,
+        public static ResourceLogging.ResourseChange ChangeResourses (int newFuel, int newAmmo, int newSteel,
             int newBaxite, int newInstantConstruction, int newInstantRepair, int newDevelopmentMaterial)
         {
 

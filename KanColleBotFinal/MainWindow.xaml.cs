@@ -39,6 +39,7 @@ namespace KanColleBotFinal
 //#endif
 
             set.Read();
+            ResourceLogging.ResLogger.LoadBinary();
             Missions.ExpeditionChanger.loadFromFile();
             Translation.Translation.LoadTranslations();
             SeijaCommunicator.Init();
@@ -111,6 +112,14 @@ namespace KanColleBotFinal
         HttpSender.GetQuestList(5);
     }));
            
+        }
+
+        private void ResLogTest_Click(object sender, RoutedEventArgs e)
+        {
+            var rc = Dock.ChangeResourses(0,0,0,0,0,0,0);
+            ResourceLogging.ResLogger.AddRecord(new ResourceLogging.QuestCompletedRecord(DateTime.Now, rc));
+            ResourceLogging.ResLogger.Clear();
+            ResourceLogging.ResLogger.LoadBinary();
         }
 
 

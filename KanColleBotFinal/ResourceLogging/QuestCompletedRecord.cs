@@ -9,6 +9,8 @@ namespace KanColleBotFinal.ResourceLogging
     [Serializable]
     public class QuestCompletedRecord : LoggerRecord
     {
+        public QuestCompletedRecord():base()
+        { }
         public QuestCompletedRecord(DateTime dt, ResourseChange ch):base(dt,ch)
         {
 

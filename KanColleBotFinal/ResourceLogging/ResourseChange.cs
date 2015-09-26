@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace KanColleBotFinal.ResourceLogging
 {
+    [Serializable]
     public class ResourseChange
     {
         public int oldFuel;
