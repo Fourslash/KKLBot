@@ -61,7 +61,7 @@ namespace KanColleBotFinal
                 {
                     if (actionList.Count(x => x.GetType() == typeof(WaitAction)) == 0)
                         AddAction(new WaitAction());
-                    addCheckQuests();
+                   // addCheckQuests();
 
                     CurrentAction = new IdleAction();
                     DescisionMaker.AddExpeditions();
